@@ -1,2 +1,5 @@
 homepage: "https://join-stories.com"
 documentation: "https://help.join-stories.com"
+versions:
+  - sha: 928f96d49a5792be611e80e3de8b7e07a10eced9
+    changeNotes: Initial release.
