@@ -137,10 +137,10 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-// Saisissez le code de votre modèle ici.
 const callInWindow = require('callInWindow');
 const makeNumber = require('makeNumber');
 const log = require('logToConsole');
+const copyFromWindow = require('copyFromWindow');
 
 
 const payload = {
@@ -155,15 +155,14 @@ const payload = {
   product_image_url: data.product_image_url,
 };
 
-log('payload =', payload);
+const fn = copyFromWindow("JoinStories.sendProductAddToCart");
 
-const call = callInWindow("JoinStories.sendProductAddToCart", payload);
-
-if (call) {
-  log('[Success] Join Stories - Checkout Tracking Code.');
+if (fn) {
+  callInWindow('JoinStories.sendProductAddToCart', payload);
+  log('[Success] Join Stories - Add to Cart Tracking Code.', payload);
   data.gtmOnSuccess();
 } else {
-  log('[Failed] Join Stories - Checkout Tracking Code : sendCartValidated not found.');
+  log('[Failed] Join Stories - Add to Cart Tracking Code : sendProductAddToCart not found.');
   data.gtmOnFailure();
 }
 
@@ -182,7 +181,7 @@ ___WEB_PERMISSIONS___
           "key": "environments",
           "value": {
             "type": 1,
-            "string": "debug"
+            "string": "all"
           }
         }
       ]
@@ -231,7 +230,7 @@ ___WEB_PERMISSIONS___
                   },
                   {
                     "type": 8,
-                    "boolean": false
+                    "boolean": true
                   },
                   {
                     "type": 8,
